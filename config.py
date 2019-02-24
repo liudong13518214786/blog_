@@ -2,14 +2,13 @@ import os
 try:
         from dev_config import *
 except:
-        DATABASE_PASSWORD = '200826'
-        DATABASE_NAME = 'blog'
+        DATABASE_PASSWORD = ''
+        DATABASE_NAME = ''
 # 数据库配置
 MYSQL_DATABASE_CONFIG = dict(
         host=os.getenv("MYSQL_HOST", "127.0.0.1"),
         port=int(os.getenv("MYSQL_PORT", "3306")),
         user=os.getenv("MYSQL_USER", "root"),
-        # passwd=os.getenv("MYSQL_PASSWD", "123kkk"),
         passwd=os.getenv("MYSQL_PASSWD", DATABASE_PASSWORD),
         db=os.getenv("MYSQL_DB", DATABASE_NAME),
         charset=os.getenv("MYSQL_CHARSET", "utf8"),
@@ -28,7 +27,7 @@ MEMCACHE_CONFIG = dict(
 
 JWT_CONFIG = dict(
         secret="Y6MUyiZjZv69bIh6K1ZD5jTRcq3yP8IC",
-        iss="blog.kenny.com",
-        aud="www.kenny.com",
+        iss="blog.xxx.com",
+        aud="www.xxx.com",
         alg="HS256"
 )

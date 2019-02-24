@@ -1,35 +1,6 @@
 from handler.base import BaseModel
 from util.decorator import memcache_for_method
 from util import static_method
-class TestModel(BaseModel):
-    async def insertone(self):
-        sqlstr = """INSERT INTO test (name, money) values ('liudong1', '101');"""
-        rv = await self.db.exec_safe(sqlstr)
-        return rv
-    # @memcache_for_method(10)
-    async def getone(self):
-        sqlstr = """SELECT * FROM test;"""
-
-        rv = await self.db.findone_safe(sqlstr)
-        return rv
-
-    async def getmany(self):
-        sqlstr = """SELECT * FROM test;"""
-        rv = await self.db.query_safe(sqlstr)
-        return rv
-
-    async def update_one(self):
-        sqlstr = """UPDATE test SET money='你好' where name='liudong1';"""
-        rv = await self.db.exec_safe(sqlstr)
-        return rv
-
-    async def trans(self):
-        sqlstr = """INSERT INTO test (name, money) values ('liudong7', '888');"""
-        self.db.transaction_exec_safe(sqlstr)
-        sqlstr = """UPDATE test SET money='你好A' where name='liudong7';"""
-        self.db.transaction_exec_safe(sqlstr)
-        rv = await self.db.transaction_commit_safe()
-        return rv
 
 class BlogModel(BaseModel):
     async def get_blog_list(self):

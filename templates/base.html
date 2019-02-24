@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>博客详情</title>
+    <meta name="author" content="Serho Liu">
+    <meta name="description" content="123123" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <link rel="shortcut icon" type="image/ico" href="/static/favicon.ico">
+    <link href="/static/feed.xml" rel="alternate" type="application/atom+xml">
+    <link href="/static/style/style.min.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/static/style/trac.css" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+  <header id="header">
+    <div class="nav">
+      <h1>
+        <a href="/">
+          <svg viewBox="0 0 50 50" width="20px" height="20px">
+            <path d="M 25 1.0507812 C 24.7825 1.0507812 24.565859 1.1197656 24.380859 1.2597656 L 1.3808594 19.210938 C 0.95085938 19.550938 0.8709375 20.179141 1.2109375 20.619141 C 1.5509375 21.049141 2.1791406 21.129062 2.6191406 20.789062 L 4 19.710938 L 4 46 C 4 46.55 4.45 47 5 47 L 19 47 L 19 29 L 31 29 L 31 47 L 45 47 C 45.55 47 46 46.55 46 46 L 46 19.710938 L 47.380859 20.789062 C 47.570859 20.929063 47.78 21 48 21 C 48.3 21 48.589063 20.869141 48.789062 20.619141 C 49.129063 20.179141 49.049141 19.550938 48.619141 19.210938 L 25.619141 1.2597656 C 25.434141 1.1197656 25.2175 1.0507812 25 1.0507812 z M 35 5 L 35 6.0507812 L 41 10.730469 L 41 5 L 35 5 z"/>
+          </svg>
+        </a>
+      </h1>
+      <nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z" />
+              </svg>
+            </span>
+          </label>
+          <div class="trigger">
+            <a class="page-link" href="/">HOME</a>
+            <a class="page-link" href="/write">WRITE</a>
+            <a class="page-link" href="/logout">LOGOUT</a>
+            <a class="page-link" href="/write?bid={{ blog_detail['uuid'] }}">MODIFY</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <div id="container">
+
+      <div class="content clearfix">
+        <div style="font-size: 24px; font-weight: 500; margin-bottom: 5px">{{ blog_detail['title'] }}</div>
+        <div style="margin-left: 10px; margin-bottom: 20px">{{ blog_detail['build_time'] }}</div>
+        <div>{% raw blog_detail['info'] %}</div>
+          <div class="operate" style="margin-left: 10px;margin-top: 30px">
+            {% if blog_prev %}
+                <div class="op" style="margin-bottom: 15px">
+                <a href="/detail/{{ blog_prev['uuid'] }}" style="text-decoration: none">
+                <div class="pre" style="margin-bottom: 6px">上一篇</div>
+                <span class="title" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; display: block; width: 50%; color: #999">{{ blog_prev['title'] }}</span>
+                </a>
+                </div>
+            {% end %}
+            {% if blog_next %}
+            <div class="op op_right" style="margin-bottom: 15px">
+            <a href="/detail/{{ blog_next['uuid'] }}" style="text-decoration: none">
+            <div class="pre" style="margin-bottom: 6px">下一篇</div>
+            <span class="title" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; display: block; width: 50%; color: #999">{{ blog_next['title'] }}</span>
+            </a>
+            </div>
+            {% end %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

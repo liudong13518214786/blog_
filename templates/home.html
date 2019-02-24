@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>我的博客</title>
+    <meta name="author" content="Serho Liu">
+    <meta name="description" content="我的博客" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <link rel="shortcut icon" type="image/ico" href="/static/favicon.ico">
+    <link href="/static/feed.xml" rel="alternate" type="application/atom+xml">
+    <link href="/static/style/style.min.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/static/style/trac.css" rel="stylesheet" type="text/css">
+  </head>
+
+{#  <body style="background: url('/static/image/1.jpg') repeat">#}
+  <body style="background: url('/static/image/1232.jpg') no-repeat; background-size: 100% 100%">
+  <header id="header">
+    <div class="nav">
+      <h1 style="font-size: 20px"><a href="/">KennyL's Home</a></h1>
+      <nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewBox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z" />
+              </svg>
+            </span>
+          </label>
+          <div class="trigger">
+
+            <a class="page-link" href="/">HOME</a>
+            <a class="page-link" href="/write">WRITE</a>
+            <a class="page-link" href="/logout">LOGOUT</a>
+          </div>
+    </nav>
+    </div>
+  </header>
+    <div id="container">
+      <div class="content clearfix">
+          <br>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;嗅着昨日芬芳遗留的气息，寻寻觅觅，仍不见踪迹。邂逅了一场烟火，终还是那般凄凉。迷失的夜晚，点缀了无数颗孤单的星星，不知道那是否有属于我的一颗。</p>
+      <h2>Recent Posts</h2>
+        <ul class="home-list">
+            {% for each in blog_list %}
+          <li>
+            <span>{{ each['build_time'] }}</span>
+            <br>
+            <a href="/detail/{{ each['uuid'] }}">{{ each['title'] }}</a>
+          </li>
+            {% end %}
+        </ul>
+      </div>
+    </div>
+    <div id="footer">
+      <div class="desc">
+        &copy; 2019-forever | <a href="/" title="By Kenny Liu">kenny's Blog</a>.
+      </div>
+    </div>
+  </body>
+</html>

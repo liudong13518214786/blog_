@@ -9,6 +9,8 @@ from sql.sql_method import BlogModel, SystemModel
 from util import static_method
 from config import JWT_CONFIG
 from util.decorator import user_auth
+from components.chatroomsdk import ChatRoomSDk
+
 try:
     from dev_config import *
 except:
@@ -105,6 +107,9 @@ class LoginHandler(BaseHandler):
             else:
                 await self.session.set("useruuid", username)
             self.finish(static_method.return_code(100, 'success'))
+            token, useruuid = await ChatRoomSDk().get_user_info(username)
+            await self.session.set("uuid", useruuid)
+            await self.session.set("token", token)
             return
         self.finish(static_method.return_code(500, '账号密码错误'))
         return
@@ -223,3 +228,27 @@ class ApiGetBlogHandler(BaseHandler):
     async def delete(self):
         """从服务器删除资源。"""
         pass
+
+class ChatHandler(BaseHandler):
+    async def get(self):
+        endPoint = ChatRoomSDk().endPoint
+        port = ChatRoomSDk().port
+        username = await self.session.get('uuid')
+        self.render("chatroom.html", endPoint=endPoint, port=port, username=username)
+
+class RoomListHandler(BaseHandler):
+    async def get(self):
+        room_info = await ChatRoomSDk().get_room_list()
+        self.render()
+
+    async def post(self):
+        roomid = self.get_argument("roomid", "")
+        token = await self.session.get('token')
+        res = await ChatRoomSDk().join_chat_room(roomid, token)
+        if res == 100:
+            self.finish(static_method.return_code(100, '加入成功'))
+        elif res == 200:
+            self.finish(static_method.return_code(100, '你已经在房间了'))
+        else:
+            self.finish(static_method.return_code(500, '系统错误'))
+        return

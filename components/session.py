@@ -42,9 +42,10 @@ class SessionMoel(object):
         """
         save_key = session_id+'_blogsession'
         _keyarr = await cache.cache_get(save_key)
-        keyarr = json.loads(_keyarr)
-        if keyarr:
-            keyarr[key] = '1'
+        if _keyarr:
+            keyarr = json.loads(_keyarr)
+            if keyarr:
+                keyarr[key] = '1'
         else:
             keyarr = {key:'1'}
         await cache.cache_set(save_key, json.dumps(keyarr))

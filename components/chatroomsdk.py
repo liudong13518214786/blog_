@@ -26,7 +26,6 @@ class ChatRoomSDk(object):
         """
         uri = "/v1/use?u=" +username
         req = tornado.httpclient.HTTPRequest(url=f'{self.endPoint}:{self.port}{uri}', method='GET')
-        print (req.url)
         client = tornado.httpclient.AsyncHTTPClient()
         resp = await tornado.gen.Task(client.fetch, req)
         body = json.loads(resp.body)

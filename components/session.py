@@ -51,12 +51,13 @@ class SessionMoel(object):
     async def clear_key(self, session_id):
         save_key = session_id+'_blogsession'
         _keyarr = await cache.cache_get(save_key)
-        keyarr = json.loads(_keyarr)
-        if keyarr:
-            for (k,v) in keyarr.items():
-                cache_key = '{0}_{1}'.format(session_id, k)
-                await cache.cache_del(cache_key)
-        await cache.cache_del(save_key)
+        if _keyarr:
+            keyarr = json.loads(_keyarr)
+            if keyarr:
+                for (k,v) in keyarr.items():
+                    cache_key = '{0}_{1}'.format(session_id, k)
+                    await cache.cache_del(cache_key)
+            await cache.cache_del(save_key)
 
     async def cleanup(self):
         session_id = self.get_session_id()

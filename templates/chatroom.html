@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <div id="messageBox">
+        <ul id="msglist">
+
+        </ul>
+    </div>
+    <input type="hidden" id="usr" value="{{usr}}">
+    <input type="text" id="msg">
+    <button id="sure" onclick="send()">发送</button>
+</div>
+
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js"></script>
+<script>
+    var user = '{{ username }}';
+    var endpoint = '{{ endPoint }}';
+    var port = '{{ port }}';
+    var ws = new ReconnectingWebSocket("ws://"+endpoint+":"+port+"/v1/ws?u="+user+"&roomid=room_ie9bd0o8");
+
+    ws.onmessage = function (evt) {
+        var msg = JSON.parse(evt.data);
+        console.log(msg);
+        var opt = '';
+        opt += "<li>"+format(msg.Mtime)+":"+ msg.Mcontent + "</li>";
+        $("#msglist").append(opt)
+    };
+    console.log(window);
+    ws.onclose = function () {
+        // console.log(ws);
+        // ws.close();
+        console.log(111);
+        // console.log(ws);
+    };
+    function send() {
+        console.log("发送中");
+        ws.send($("#msg").val());
+    }
+    function add0(m){return m<10?'0'+m:m }
+    function format(shijianchuo)
+    {
+        //shijianchuo是整数，否则要parseInt转换
+        var time = new Date(shijianchuo);
+        var y = time.getFullYear();
+        var m = time.getMonth()+1;
+        var d = time.getDate();
+        var h = time.getHours();
+        var mm = time.getMinutes();
+        var s = time.getSeconds();
+        return y+'-'+add0(m)+'-'+add0(d)+' '+add0(h)+':'+add0(mm)+':'+add0(s);
+    }
+</script>
+</html>

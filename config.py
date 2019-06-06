@@ -2,8 +2,8 @@ import os
 try:
         from dev_config import *
 except:
-        DATABASE_PASSWORD = ''
-        DATABASE_NAME = ''
+        DATABASE_PASSWORD = '200826'
+        DATABASE_NAME = 'blog'
 # 数据库配置
 MYSQL_DATABASE_CONFIG = dict(
         host=os.getenv("MYSQL_HOST", "127.0.0.1"),

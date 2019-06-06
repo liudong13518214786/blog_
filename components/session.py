@@ -41,8 +41,8 @@ class SessionMoel(object):
         :return:
         """
         save_key = session_id+'_blogsession'
-        keyarr = await cache.cache_get(save_key)
-        print (keyarr)
+        _keyarr = await cache.cache_get(save_key)
+        keyarr = json.loads(_keyarr)
         if keyarr:
             keyarr[key] = '1'
         else:

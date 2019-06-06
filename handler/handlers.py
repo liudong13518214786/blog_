@@ -107,6 +107,8 @@ class LoginHandler(BaseHandler):
             else:
                 await self.session.set("useruuid", username)
             token, useruuid = await ChatRoomSDk().get_user_info(username)
+            print (token)
+            print (useruuid)
             await self.session.set("uuid", useruuid)
             await self.session.set("token", token)
             self.finish(static_method.return_code(100, 'success'))

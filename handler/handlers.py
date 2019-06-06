@@ -234,7 +234,7 @@ class ChatHandler(BaseHandler):
         endPoint = ChatRoomSDk().endPoint
         port = ChatRoomSDk().port
         username = await self.session.get('uuid')
-        self.render("chatroom.html", endPoint=endPoint, port=port, username=username)
+        self.render("chatroom.html", endPoint=endPoint.replace("http://", ""), port=port, username=username)
 
 class RoomListHandler(BaseHandler):
     async def get(self):

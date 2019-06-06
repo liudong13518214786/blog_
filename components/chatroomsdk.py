@@ -25,7 +25,7 @@ class ChatRoomSDk(object):
         :return:
         """
         uri = "/v1/use?u=" +username
-        req = tornado.httpclient.HTTPRequest(url=f'{self.endPoint}:{self.port}/{uri}', method='GET')
+        req = tornado.httpclient.HTTPRequest(url=f'{self.endPoint}:{self.port}{uri}', method='GET')
         print (req.url)
         client = tornado.httpclient.AsyncHTTPClient()
         resp = await tornado.gen.Task(client.fetch, req)
@@ -43,7 +43,7 @@ class ChatRoomSDk(object):
         headers = {
             "token": token
         }
-        req = tornado.httpclient.HTTPRequest(url=f'{self.endPoint}:{self.port}/{uri}', method='GET', headers=headers)
+        req = tornado.httpclient.HTTPRequest(url=f'{self.endPoint}:{self.port}{uri}', method='GET', headers=headers)
         client = tornado.httpclient.AsyncHTTPClient()
         resp = await tornado.gen.Task(client.fetch, req)
         body = json.loads(resp.body)
@@ -58,7 +58,7 @@ class ChatRoomSDk(object):
         headers = {
             "token": token
         }
-        req = tornado.httpclient.HTTPRequest(url=f'{self.endPoint}:{self.port}/{uri}', method='POST', headers=headers)
+        req = tornado.httpclient.HTTPRequest(url=f'{self.endPoint}:{self.port}{uri}', method='POST', headers=headers)
         client = tornado.httpclient.AsyncHTTPClient()
         resp = await tornado.gen.Task(client.fetch, req)
         body = json.loads(resp.body)
@@ -70,7 +70,7 @@ class ChatRoomSDk(object):
 
     async def get_room_list(self):
         uri = "/v1/room"
-        req = tornado.httpclient.HTTPRequest(url=f'{self.endPoint}:{self.port}/{uri}', method='GET')
+        req = tornado.httpclient.HTTPRequest(url=f'{self.endPoint}:{self.port}{uri}', method='GET')
         client = tornado.httpclient.AsyncHTTPClient()
         resp = await tornado.gen.Task(client.fetch, req)
         body = json.loads(resp.body)

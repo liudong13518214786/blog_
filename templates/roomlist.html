@@ -7,10 +7,18 @@
 <body>
 {% for each in room_info %}
     <div>
-        <div>房间名:{{ each["room_name"] }}</div>
+        <div>
+            房间名:{{ each["room_name"] }}
+            <button onclick="join('{{ each["uuid"] }}')">加入</button>
+        </div>
         <div>房主:{{ each["owner"] }}</div>
         <div>创建时间:{{ each["build_time"] }}</div>
     </div>
 {% end %}
+<script>
+    function join(uuid) {
+
+    }
+</script>
 </body>
 </html>

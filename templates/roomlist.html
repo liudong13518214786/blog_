@@ -15,6 +15,9 @@
         <div>创建时间:{{ each["build_time"] }}</div>
     </div>
 {% end %}
+<div>
+    <button onclick="crateroom()">创建聊天室</button>
+</div>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script>
     function join(uuid) {
@@ -29,6 +32,20 @@
             }
         }, 'json')
     }
+
+    function crateroom() {
+        $.post('/createroom', {
+            name: "聊天室"
+        }, function (data) {
+            if(data.code==100){
+                window.location.href = '/roomlist';
+            }
+            else{
+                alert(data.msg)
+            }
+        }, 'json')
+    }
+
 </script>
 </body>
 </html>

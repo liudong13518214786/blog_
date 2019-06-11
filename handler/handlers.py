@@ -241,10 +241,12 @@ class CreateChatRoomHandler(BaseHandler):
     async def get(self):
         token = await self.session.get("token")
         res = await ChatRoomSDk().create_chat_room(token)
-        if not res:
-            self.finish(static_method.return_code(500, '创建失败'))
-            return
-        self.finish(static_method.return_code(100, "创建成功"))
+        self.write(res)
+        self.finish()
+        # if not res:
+        #     self.finish(static_method.return_code(500, '创建失败'))
+        #     return
+        # self.finish(static_method.return_code(100, "创建成功"))
 
 class RoomListHandler(BaseHandler):
     async def get(self):

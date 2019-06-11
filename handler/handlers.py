@@ -9,7 +9,7 @@ from sql.sql_method import BlogModel, SystemModel
 from util import static_method
 from config import JWT_CONFIG
 from util.decorator import user_auth
-from components.chatroomsdk import ChatRoomSDk
+from components.chatroomsdk import GChatRoomSDk
 
 try:
     from dev_config import *
@@ -106,7 +106,7 @@ class LoginHandler(BaseHandler):
                 await self.session.set("useruuid", username, exp=86400*30)
             else:
                 await self.session.set("useruuid", username)
-            token, useruuid = await ChatRoomSDk().get_user_info(username)
+            token, useruuid = await GChatRoomSDk.get_user_info(username)
 
             await self.session.set("uuid", useruuid)
             await self.session.set("token", token)
@@ -232,8 +232,8 @@ class ApiGetBlogHandler(BaseHandler):
 
 class ChatHandler(BaseHandler):
     async def get(self):
-        endPoint = ChatRoomSDk().endPoint
-        port = ChatRoomSDk().port
+        endPoint = GChatRoomSDk.endPoint
+        port = GChatRoomSDk.port
         username = await self.session.get('uuid')
         self.render("chatroom.html", endPoint=endPoint.replace("http://", ""), port=port, username=username)
 
@@ -241,7 +241,7 @@ class CreateChatRoomHandler(BaseHandler):
     async def get(self):
         token = await self.session.get("token")
         print (token)
-        res = await ChatRoomSDk().create_chat_room(token)
+        res = await GChatRoomSDk.create_chat_room(token)
         print (res)
         # if not res:
         #     self.finish(static_method.return_code(500, '创建失败'))
@@ -250,13 +250,13 @@ class CreateChatRoomHandler(BaseHandler):
 
 class RoomListHandler(BaseHandler):
     async def get(self):
-        room_info = await ChatRoomSDk().get_room_list()
+        room_info = await GChatRoomSDk.get_room_list()
         self.render("roomlist.html", room_info=room_info)
 
     async def post(self):
         roomid = self.get_argument("roomid", "")
         token = await self.session.get('token')
-        res = await ChatRoomSDk().join_chat_room(roomid, token)
+        res = await GChatRoomSDk.join_chat_room(roomid, token)
         if res == 100:
             self.finish(static_method.return_code(100, '加入成功'))
         elif res == 200:

@@ -6,6 +6,7 @@
 import tornado.httpclient
 import tornado.gen
 import json
+
 class ChatRoomSDk(object):
     _instance = {}
 
@@ -79,3 +80,5 @@ class ChatRoomSDk(object):
         else:
             roomlist = []
         return roomlist
+
+GChatRoomSDk = ChatRoomSDk()

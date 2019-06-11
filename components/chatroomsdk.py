@@ -10,7 +10,7 @@ class ChatRoomSDk(object):
     _instance = {}
 
     def __init__(self):
-        self.endPoint = "http://127.0.0.1"
+        self.endPoint = "http://47.93.19.60"
         self.port = 5000
 
     def __new__(cls, *args, **kwargs):

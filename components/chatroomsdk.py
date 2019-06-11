@@ -6,7 +6,7 @@
 import tornado.httpclient
 import tornado.gen
 import json
-
+import logging
 class ChatRoomSDk(object):
     _instance = {}
 
@@ -47,7 +47,7 @@ class ChatRoomSDk(object):
         client = tornado.httpclient.AsyncHTTPClient()
         resp = await tornado.gen.Task(client.fetch, req)
         body = json.loads(resp.body)
-        print (body), "55"
+        logging.info(body)
         if body and body.get("code") == 100:
             roomid = body.get("message")
         else:

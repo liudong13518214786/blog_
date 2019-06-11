@@ -59,7 +59,7 @@ class ChatRoomSDk(object):
         headers = {
             "token": token
         }
-        req = tornado.httpclient.HTTPRequest(url=f'{self.endPoint}:{self.port}{uri}', method='POST', headers=headers)
+        req = tornado.httpclient.HTTPRequest(url=f'{self.endPoint}:{self.port}{uri}', method='POST',body="", headers=headers)
         logging.info(req.url)
         client = tornado.httpclient.AsyncHTTPClient()
         resp = await tornado.gen.Task(client.fetch, req)

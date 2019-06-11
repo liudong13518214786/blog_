@@ -9,6 +9,7 @@ handler = [
     (r"/upload", UploadFileHandler),
     (r"/api/1.0/blog", ApiGetBlogHandler),
     (r"/chat", ChatHandler),
-    (r"/create", CreateChatRoomHandler),
+    (r"/createroom", CreateChatRoomHandler),
+    (r"/roomlist", RoomListHandler),
 
 ]

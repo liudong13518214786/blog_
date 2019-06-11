@@ -238,11 +238,10 @@ class ChatHandler(BaseHandler):
         self.render("chatroom.html", endPoint=endPoint.replace("http://", ""), port=port, username=username)
 
 class CreateChatRoomHandler(BaseHandler):
-    async def get(self):
+    async def post(self):
         room_name = self.get_argument("name", "")
         token = await self.session.get("token")
         res = await GChatRoomSDk.create_chat_room(token, room_name)
-
         if not res:
             self.finish(static_method.return_code(500, '创建失败'))
             return

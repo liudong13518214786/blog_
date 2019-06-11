@@ -38,8 +38,8 @@ class ChatRoomSDk(object):
             useruuid = ""
         return token, useruuid
 
-    async def create_chat_room(self, token):
-        uri = "/v1/join"
+    async def create_chat_room(self, token, room_name):
+        uri = "/v1/join?room="+room_name
         headers = {
             "token": token
         }

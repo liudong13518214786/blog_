@@ -239,14 +239,14 @@ class ChatHandler(BaseHandler):
 
 class CreateChatRoomHandler(BaseHandler):
     async def get(self):
+        room_name = self.get_argument("name", "")
         token = await self.session.get("token")
+        res = await GChatRoomSDk.create_chat_room(token, room_name)
 
-        res = await GChatRoomSDk.create_chat_room(token)
-
-        # if not res:
-        #     self.finish(static_method.return_code(500, '创建失败'))
-        #     return
-        # self.finish(static_method.return_code(100, "创建成功"))
+        if not res:
+            self.finish(static_method.return_code(500, '创建失败'))
+            return
+        self.finish(static_method.return_code(100, "创建成功"))
 
 class RoomListHandler(BaseHandler):
     async def get(self):

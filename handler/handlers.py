@@ -107,8 +107,7 @@ class LoginHandler(BaseHandler):
             else:
                 await self.session.set("useruuid", username)
             token, useruuid = await ChatRoomSDk().get_user_info(username)
-            print (token)
-            print (useruuid)
+
             await self.session.set("uuid", useruuid)
             await self.session.set("token", token)
             self.finish(static_method.return_code(100, 'success'))
@@ -238,10 +237,19 @@ class ChatHandler(BaseHandler):
         username = await self.session.get('uuid')
         self.render("chatroom.html", endPoint=endPoint.replace("http://", ""), port=port, username=username)
 
+class CreateChatRoomHandler(BaseHandler):
+    async def get(self):
+        token = await self.session.get("token")
+        res = await ChatRoomSDk().create_chat_room(token)
+        if not res:
+            self.finish(static_method.return_code(500, '创建失败'))
+            return
+        self.finish(static_method.return_code(100, "创建成功"))
+
 class RoomListHandler(BaseHandler):
     async def get(self):
         room_info = await ChatRoomSDk().get_room_list()
-        self.render()
+        self.render("roomlist.html", room_info=room_info)
 
     async def post(self):
         roomid = self.get_argument("roomid", "")

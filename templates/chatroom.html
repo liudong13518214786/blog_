@@ -23,7 +23,8 @@
     var user = '{{ username }}';
     var endpoint = '{{ endPoint }}';
     var port = '{{ port }}';
-    var ws = new ReconnectingWebSocket("ws://"+endpoint+":"+port+"/v1/ws?u="+user+"&roomid=room_lybyqelk");
+    var room_id = '{{ room_id }}';
+    var ws = new ReconnectingWebSocket("ws://"+endpoint+":"+port+"/v1/ws?u="+user+"&roomid="+room_id);
 
     ws.onmessage = function (evt) {
         var msg = JSON.parse(evt.data);

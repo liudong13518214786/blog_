@@ -15,9 +15,19 @@
         <div>创建时间:{{ each["build_time"] }}</div>
     </div>
 {% end %}
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script>
     function join(uuid) {
-
+        $.post('/roomlist', {
+            roomid: uuid
+        }, function (data) {
+            if(data.code==100){
+                window.location.href = '/chat?ruuid='+uuid;
+            }
+            else{
+                alert(data.msg)
+            }
+        }, 'json')
     }
 </script>
 </body>

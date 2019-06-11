@@ -235,7 +235,8 @@ class ChatHandler(BaseHandler):
         endPoint = GChatRoomSDk.endPoint
         port = GChatRoomSDk.port
         username = await self.session.get('uuid')
-        self.render("chatroom.html", endPoint=endPoint.replace("http://", ""), port=port, username=username)
+        room_id = self.get_argument("ruuid", "")
+        self.render("chatroom.html", endPoint=endPoint.replace("http://", ""), port=port, username=username, room_id=room_id)
 
 class CreateChatRoomHandler(BaseHandler):
     async def post(self):

@@ -6,7 +6,11 @@
 </head>
 <body>
 {% for each in room_info %}
-    {{ each }}
+    <div>
+        <div>房间名:{{ each["room_name"] }}</div>
+        <div>房主:{{ each["owner"] }}</div>
+        <div>创建时间:{{ each["build_time"] }}</div>
+    </div>
 {% end %}
 </body>
 </html>

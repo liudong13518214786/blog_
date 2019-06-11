@@ -1,3 +1,5 @@
+import logging
+
 import jwt
 import time
 import base64
@@ -257,6 +259,7 @@ class RoomListHandler(BaseHandler):
         roomid = self.get_argument("roomid", "")
         token = await self.session.get('token')
         res = await GChatRoomSDk.join_chat_room(roomid, token)
+        logging.info(res)
         if res == 100:
             self.finish(static_method.return_code(100, '加入成功'))
         elif res == 200:

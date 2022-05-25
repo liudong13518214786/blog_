@@ -16,7 +16,7 @@ Naked==0.1.31
 pipreqs==0.4.9
 pyasn1==0.4.5
 pycparser==2.19
-PyJWT==1.7.1
+PyJWT==2.4.0
 PyMySQL==0.9.3
 python-jwt==3.2.4
 PyYAML==3.13

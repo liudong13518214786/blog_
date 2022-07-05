@@ -25,6 +25,6 @@ shellescape==3.4.1
 six==1.12.0
 tormysql==0.4.0
 tornado==5.1.1
-ujson==1.35
+ujson==5.4.0
 urllib3==1.24.1
 yarg==0.1.9

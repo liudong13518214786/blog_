@@ -18,7 +18,7 @@ pyasn1==0.4.5
 pycparser==2.19
 PyJWT==1.7.1
 PyMySQL==0.9.3
-python-jwt==3.2.4
+python-jwt==3.3.4
 PyYAML==3.13
 requests==2.21.0
 shellescape==3.4.1
